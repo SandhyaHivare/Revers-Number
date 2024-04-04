@@ -1,0 +1,47 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        string str = "aabbccddeeffgghh";
+        List<char> nonRepeatingChars = FindNonRepeatingChars(str);
+        
+        Console.WriteLine("Non-repeating characters in the string:");
+        foreach (char ch in nonRepeatingChars)
+        {
+            Console.WriteLine(ch);
+        }
+    }
+
+    static List<char> FindNonRepeatingChars(string str)
+    {
+        Dictionary<char, int> charCount = new Dictionary<char, int>();
+        List<char> nonRepeatingChars = new List<char>();
+
+        // Count the occurrence of each character
+        foreach (char ch in str)
+        {
+            if (charCount.ContainsKey(ch))
+            {
+                charCount[ch]++;
+            }
+            else
+            {
+                charCount[ch] = 1;
+            }
+        }
+
+        // Add non-repeating characters to the list
+        foreach (var kvp in charCount)
+        {
+            if (kvp.Value == 1)
+            {
+                nonRepeatingChars.Add(kvp.Key);
+            }
+        }
+
+        return nonRepeatingChars;
+    }
+}

@@ -1,0 +1,38 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        string s1 = "abcabcbb";
+        string s2 = "bbbbb";
+        string s3 = "pwwkew";
+
+        Console.WriteLine("Length of the longest substring without repeating characters in s1: " + LengthOfLongestSubstring(s1));
+        Console.WriteLine("Length of the longest substring without repeating characters in s2: " + LengthOfLongestSubstring(s2));
+        Console.WriteLine("Length of the longest substring without repeating characters in s3: " + LengthOfLongestSubstring(s3));
+    }
+
+    static int LengthOfLongestSubstring(string s)
+    {
+        int n = s.Length;
+        int maxLength = 0;
+        int i = 0, j = 0;
+        HashSet<char> set = new HashSet<char>();
+
+        while (j < n)
+        {
+            if (!set.Contains(s[j]))
+            {
+                set.Add(s[j++]);
+                maxLength = Math.Max(maxLength, j - i);
+            }
+            else
+            {
+                set.Remove(s[i++]);
+            }
+        }
+        return maxLength;
+    }
+}
